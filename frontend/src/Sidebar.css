@@ -1,0 +1,162 @@
+.sidebar{
+    background-color: #171717;
+    color: #b4b4b4;
+    height: 100vh;
+    width: 320px;
+     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+button{
+    display: flex;
+     gap: 10px;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: solid 0.5px rgba(255,255,255,0.5);
+    cursor: pointer;
+     transition: all 0.2s ease;
+      width: calc(100% - 20px);   /* important */
+    box-sizing: border-box;
+}
+.logo{
+    height:25px;
+    width: 25px;
+    background-color:#fff;
+    border-radius: 50%;
+    object-fit: cover;
+ 
+    transition: all 0.2s ease;
+}
+
+.logo:hover{
+ box-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+    border: 2px solid #8b0000;   
+}
+
+
+button input {
+    flex: 1;
+      min-width: 0;  
+    background: transparent;
+    border: none;
+    outline: none;
+    color:white;          /* text black */
+    font-size: 14px;
+}
+
+/* Placeholder color */
+button input::placeholder {
+    color: #888;
+}
+
+
+button span{
+font-size: 20px;
+  flex-shrink: 0;
+}
+
+button:hover {
+    background-color: rgba(180,180,180,0.08);
+    box-shadow: 0 0 8px rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.8);
+}
+
+.history{
+ margin: 10px;
+ padding: 10px;
+ height:100%;
+  overflow-y: auto;
+    scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;  
+}
+
+
+
+.history::-webkit-scrollbar {
+  display: none;                /* Chrome, Safari */
+} 
+
+.history li{
+    list-style-type:none;
+    cursor:pointer;
+    padding:2px 5px;
+    margin-bottom: 0.3rem;
+    font-size:14px;
+    border: solid 10px transparent;
+    position:relative;
+}
+
+
+
+.history li:hover{
+    background-color: rgba(180, 180, 180, 0.05);
+    border-radius: 10px;
+}
+
+.sign{
+    padding: 10px;
+    margin: 10px;
+    font-size: 14px;
+    text-align: center;
+    border-top:solid 0.25px rgba(255,255,255,0.50);
+}
+.fa-trash {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+}
+
+/* Show icon when hovering over row */
+.history li:hover .fa-trash {
+  opacity: 1;
+  color: #fff;
+}
+
+/* Change icon color when hovering over icon */
+.fa-trash:hover {
+  color: #f87171 !important;
+}
+
+.highlighted{
+  background-color: rgba(180,180,180,0.05);
+  border-radius: 10px;
+}
+/* Tablet view */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 250px;
+  }
+}
+/* Mobile sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 260px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 480px) {
+  button {
+    gap: 6px;
+    padding: 8px;
+  }
+
+  button span {
+    font-size: 16px;
+  }
+}

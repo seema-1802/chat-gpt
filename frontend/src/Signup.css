@@ -1,0 +1,315 @@
+.page {
+  min-height: 100vh;
+  width: 100%;
+  background: #f3f2ef;
+}
+
+.card {
+  width: 100%;
+  min-height: 100vh;
+  background: white;
+  display: flex;
+}
+
+
+
+/* left and right mate */
+.left h1 {
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+
+.left,
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left {
+  padding: 60px;
+}
+
+
+/* RIGHT SIDE */
+.right {
+  flex: 1;
+  background: linear-gradient(135deg, #0a66c2, #004182);
+  color: white;
+  
+  align-items: center;
+  text-align: center;
+  padding: 60px;
+}
+
+.right h2 {
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+
+.right p {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+
+
+/* input mate */
+.input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 13px 15px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: #fff;
+  color: #000;
+  transition: all 0.25s ease;
+  box-sizing: border-box; 
+}
+
+/* Placeholder style */
+.input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+/* Hover effect */
+.input:hover {
+  border-color: #0a66c2;
+  box-shadow: 0 4px 10px rgba(10, 102, 194, 0.15);
+}
+
+/* Focus effect (when typing) */
+.input:focus {
+  outline: none;
+  border-color: #0a66c2;
+  box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.2);
+  background: #fff;
+}
+
+/* BUTTON */
+.button {
+  margin-top: 10px;
+  padding: 13px;
+  background: #0a66c2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #004182;
+}
+.me {
+  margin-top: 12px;
+  padding: 12px;
+  background: transparent;
+  
+  color: #0a66c2;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.highlight {
+  color: #0a66c2;
+  font-weight: 700;
+  margin-left: 4px;
+  transition: 0.3s ease;
+}
+.me:hover {
+  
+   
+  color: black;
+}
+
+.me:hover .highlight {
+  text-decoration: underline;
+  color: #004182;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .left,
+  .right {
+    padding: 40px 30px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+  }
+
+  .right {
+    order: -1;
+    padding: 40px 20px;
+  }
+
+  .left {
+    padding: 30px 20px;
+  }
+}
+
+
+
+
+
+
+
+
+/* Error message */
+.error {
+  color: #e53935;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+/* Success text */
+.success-text {
+  font-size: 18px;
+  margin-top: 10px;
+}
+/* alet -pop mate */
+.alert-popup {
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 320px;
+  max-width: 90%;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(135deg, #ff4d4f, #d32f2f);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  animation: toastSlide 0.4s ease, fadeOut 0.4s ease 2.6s forwards;
+}
+
+/* Slide from top */
+@keyframes toastSlide {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Smooth fade out */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+}
+.alert-popup.success {
+  background: linear-gradient(135deg, #2e7d32, #1b5e20);
+}
+/* pop mate */
+.blur {
+  filter: blur(6px);
+  pointer-events: none;
+}
+.success-box {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  max-width: 260px;
+  width: 90%;
+  animation: popIn 0.4s ease;
+}
+
+
+
+/* User image */
+.user-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid white;
+    object-fit: cover;
+}
+
+/* Text */
+.success-box h3 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.success-box p {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+
+/* load mate */
+.small-loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid transparent;
+  border-top: 4px solid #0a66c2;
+  border-right: 4px solid #0a66c2;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+/* respobi bana va mate */
+@media (max-width: 480px) {
+   .left,
+  .right {
+    padding: 22px 16px;
+  }
+  .input {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .button {
+    font-size: 14px;
+    padding: 11px;
+  }
+
+  .success-box h3 {
+    font-size: 18px;
+  }
+
+  .success-box p {
+    font-size: 13px;
+  }
+}
