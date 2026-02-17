@@ -10,6 +10,7 @@ router.post("/test", async (req, res) => {
     try {
         const thread = new Thread({
             threadId: "xyz",
+             user: req.user._id,
             title: "testing new thread",
         });
         const response = await thread.save();
@@ -23,7 +24,7 @@ router.post("/test", async (req, res) => {
 router.get("/thread", async (req, res) => {
 
     try {
-     const thread = await Thread.find({}).sort({ updatedAt: -1 }); 
+     const thread = await Thread.find({user: req.user._id }).sort({ updatedAt: -1 }); 
         //
         res.json(thread);
 
@@ -56,7 +57,7 @@ router.delete("/thread/:threadId", async (req, res) => {
     const { threadId } = req.params;
     try {
 
-        const deletedthread = await Thread.findOneAndDelete({ threadId });
+        const deletedthread = await Thread.findOneAndDelete({ threadId, user: req.user._id  });
         if (!deletedthread) {
             res.status(404).send({ error: "thread is not found" });
         }
