@@ -4,42 +4,58 @@ import Thread from "../models/Thread.js"
 import getOpenAIAPIResponse from '../utils/openai.js';
 
 const router = express.Router();
-
 router.post("/test", async (req, res) => {
+  try {
 
-    try {
-        const thread = new Thread({
-            threadId: "xyz",
-             user: req.user._id,
-            title: "testing new thread",
-        });
-        const response = await thread.save();
-        res.send(response);
+    if (!req.user) {
+      return res.status(401).json({ error: "Login required" });
     }
-    catch (err) {
-        res.status(500).send({ error: "Internal Server Error" });
-    }
+
+    const thread = new Thread({
+      threadId: "xyz",
+      user: req.user._id,
+      title: "testing new thread",
+      messages: [
+        {
+          role: "user",
+          content: "test message"
+        }
+      ]
+    });
+
+    const response = await thread.save();
+    res.send(response);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
 });
-
 router.get("/thread", async (req, res) => {
+  try {
+    console.log("req.user =", req.user);
 
-    try {
-     const thread = await Thread.find({user: req.user._id }).sort({ updatedAt: -1 }); 
-        //
-        res.json(thread);
-
-    } catch (err) {
-        console.log(err);
-        res.status(500).send({ error: "Internal Server Error" });
+    if (!req.user) {
+      return res.status(401).json({ error: "Not logged in" });
     }
+
+    const threads = await Thread.find({
+      user: req.user._id
+    }).sort({ updatedAt: -1 });
+
+    res.json(threads);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err.message });
+  }
 });
-
-
 router.get("/thread/:threadId", async (req, res) => {
 const{ threadId }= req.params;
     try {
 
-          const thread = await Thread.findOne({ threadId }); 
+          const thread = await Thread.findOne({  threadId,
+  user: req.user._id }); 
 
         if (!thread) {
             res.status(404).send({ error: "thread is not found" });
@@ -51,23 +67,29 @@ const{ threadId }= req.params;
         res.status(500).send({ error: "Internal Server Error" });
     }
 });
-
 router.delete("/thread/:threadId", async (req, res) => {
+  const { threadId } = req.params;
 
-    const { threadId } = req.params;
-    try {
-
-        const deletedthread = await Thread.findOneAndDelete({ threadId, user: req.user._id  });
-        if (!deletedthread) {
-            res.status(404).send({ error: "thread is not found" });
-        }
-
-        res.status(200).send({ success: "thread is deleted successfully" });
-
-    } catch (err) {
-        console.log(err);
-        res.status(500).send({ error: "Internal Server Error" });
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: "Not logged in" });
     }
+
+    const deletedthread = await Thread.findOneAndDelete({
+      threadId,
+      user: req.user._id
+    });
+
+    if (!deletedthread) {
+      return res.status(404).json({ error: "thread not found" });
+    }
+
+    res.status(200).json({ success: true });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 
@@ -75,6 +97,10 @@ router.delete("/thread/:threadId", async (req, res) => {
 
 router.post("/chat", async (req, res) => {
   const { threadId, messages } = req.body;
+
+ if (!req.user) {
+    return res.status(401).json({ error: "Login required" });
+  }
 
   if (!threadId || !messages) {
     return res.status(400).send({ error: "threadId and messages are required" });
@@ -87,6 +113,7 @@ router.post("/chat", async (req, res) => {
     if (!thread) {
       thread = new Thread({
         threadId,
+         user: req.user?._id,
         title: messages,
         messages: [{ role: "user", content: messages }],
       });
@@ -94,20 +121,28 @@ router.post("/chat", async (req, res) => {
       thread.messages.push({ role: "user", content: messages });
     }
 
+ console.log("User Message:", messages);
+
     
     const assistantReply = await getOpenAIAPIResponse(messages);
     
 
+  console.log("OpenAI Reply:", assistantReply);
     thread.messages.push({ role: "assistant", content: assistantReply });
     thread.updatedAt = Date.now();
     await thread.save();
 
     return res.status(200).json({ reply: assistantReply });
 
-  } catch (err) {
-    console.log(err);
-    res.status(500).send({ error: "Internal Server Error" });
-  }
+  } 
+  catch (err) {
+  console.log("CHAT ERROR =", err);
+
+  return res.status(500).json({
+    message: err.message,
+    error: err
+  });
+}
 });
 
 export default router;

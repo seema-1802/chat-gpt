@@ -1,7 +1,7 @@
 
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-import User from "./user.js";
+
 const Messageschema =new mongoose.Schema({
     role: {
         type :String,
@@ -24,12 +24,12 @@ const ThreadSchema=new mongoose.Schema({
     threadId:{
         type:String,
         required:true,
-        unique:true
+        unique:true,
     },
       user: {
     type: Schema.Types.ObjectId, // Reference to the User model
     ref: "User",
-    required: true
+    required: true,
   },
     title:{
         type:String,
@@ -44,11 +44,14 @@ const ThreadSchema=new mongoose.Schema({
     updatedAt:{
         type:Date,
         default:Date.now
-    }
-});
+    },
+
+}
+, { timestamps: false }
+);
 
 ThreadSchema.pre("save", function(next) {
-  this.updatedAt = Date.now();
+  this.updatedAt =  new Date();
   next();
 });
 

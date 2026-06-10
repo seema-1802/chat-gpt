@@ -34,7 +34,7 @@ const userSchema = new Schema({
 
 }, { timestamps: true });
 
-userSchema.plugin(passportLocalMongoose, { usernameField: 'Email' });
+userSchema.plugin(passportLocalMongoose, { usernameField: 'Email', });
 
 
 const User = mongoose.model("User", userSchema);
