@@ -287,10 +287,3 @@ bottom: 13px;
     width: 170px;
   }
 }
-.dark-theme .input::placeholder {
-  color: #b4b4b4;
-}
-
-.light-theme .input::placeholder {
-  color: #666;
-}
