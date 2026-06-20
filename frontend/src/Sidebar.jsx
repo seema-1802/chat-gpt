@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { BACKEND_URL } from "./MyContext";
-import logo from "./assets/chat_gpt_logo.png";
+import logo from "./assets/chat_gpt_logo.png.jpg";
 import MyContext from './MyContext';
 import { useContext, useEffect } from 'react';
 
