@@ -17,8 +17,6 @@ function ChatWindow (){
   const [loading,setLoading]=useState(false);
   const [isOpen,setIsOpen]=useState(false);
 const [showProfile, setShowProfile] = useState(false);
-const [darkMode, setDarkMode] = useState(true);
-
 
   const getReply=async()=>{
      if (!prompt.trim()) return; 
@@ -108,28 +106,15 @@ const [darkMode, setDarkMode] = useState(true);
 
   return (
      
-     <div className={`chatWindow ${darkMode ? "dark-theme" : "light-theme"}`}>
+     <div className='chatWindow'>
       <div className='navbar'>
-      
-      <span onClick={() => setIsOpen(!isOpen)}>
-  ALL know <i className="fa-solid fa-chevron-down"></i>
-</span>
+        <span onClick={() => setSidebarOpen(true)} className="menuBtn">
+    <i className="fa-solid fa-bars"></i>
+  </span>
 
-{isOpen && (
-  <div className="dropDown">
-    <div
-      className="dropDownItem"
-      onClick={() => {
-        setDarkMode(!darkMode);
-        setIsOpen(false);
-      }}
-    >
-      {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-    </div>
-  </div>
-)}
-      
-               <div className='userIconDiv' onClick={handleOnClick}> 
+          <span>ALL know<i className='fa-solid fa-chevron-down' ></i></span>
+          
+         <div className='userIconDiv' onClick={handleOnClick}> 
   <span className='userIcon' ><i className="fa-solid fa-user"></i></span>
 </div>
       </div>
