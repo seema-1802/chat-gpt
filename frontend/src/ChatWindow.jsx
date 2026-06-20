@@ -31,6 +31,7 @@ const [showProfile, setShowProfile] = useState(false);
 
     const options={
       method:"POST",
+        credentials: "include",
       headers:{
         "Content-Type":"application/json"
       },

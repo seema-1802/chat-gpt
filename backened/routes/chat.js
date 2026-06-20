@@ -122,7 +122,7 @@ router.post("/chat", async (req, res) => {
     }
 
  console.log("User Message:", messages);
-
+console.log("req.user =", req.user);
     
     const assistantReply = await getOpenAIAPIResponse(messages);
     

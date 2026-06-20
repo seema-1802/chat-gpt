@@ -23,6 +23,12 @@ const [search, setSearch] = useState("");
       const response = await fetch(`${BACKEND_URL}/api/thread`);
 ;
       const res = await response.json();
+
+if (!Array.isArray(res)) {
+  console.log("API Error:", res);
+  setAllThreads([]);
+  return;
+}
       const filterData = res.map(thread => ({ threadId: thread.threadId, title: thread.title }));
       
       setAllThreads(filterData);
@@ -54,7 +60,9 @@ setSidebarOpen(false);
     setCurrThreadId(newThreadId);
  setReply(null); 
     try {
-      const response = await fetch(`${BACKEND_URL}/api/thread/${newThreadId}`);
+      const response = await fetch(`${BACKEND_URL}/api/thread/${newThreadId}`, {
+    credentials: "include"
+  });
 ;
       const res = await response.json();
       
@@ -72,7 +80,8 @@ const deleteThread = async (threadId) => {
   if (!confirmDelete) return;
   try {
     const response = await fetch(`${BACKEND_URL}/api/thread/${threadId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+       credentials: "include"
     });
 
     const res = await response.json();
