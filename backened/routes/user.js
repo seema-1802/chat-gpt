@@ -21,15 +21,20 @@ router.post("/signup", async (req, res) => {
     const newUser = new User({ Name, Email });
     const registeredUser = await User.register(newUser, Password);
 
+     req.logIn(registeredUser, (err) => {
+      if (err) {
+        return res.status(500).json({ error: "Auto login failed" });
+      }
 
-    res.status(201).json({
-      message: "User registered successfully",
-      user: {
-        id: registeredUser._id,
-        Name: registeredUser.Name,
-        Email: registeredUser.Email,
-        ProfileImage: registeredUser.ProfileImage,
-      },
+      return res.status(201).json({
+        message: "User registered successfully",
+        user: {
+          id: registeredUser._id,
+          Name: registeredUser.Name,
+          Email: registeredUser.Email,
+          ProfileImage: registeredUser.ProfileImage,
+        },
+      });
     });
   } catch (err) {
     console.error(err);
