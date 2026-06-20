@@ -154,6 +154,10 @@ const [showProfile, setShowProfile] = useState(false);
       />
       <h3>{user?.Name}</h3>
       <p>{user?.Email}</p>
+      <div className="profileInfo">
+    <p>👋 Welcome back!</p>
+    <p>Manage your account and preferences.</p>
+  </div>
     </div>
   ) : (
     <Chat />

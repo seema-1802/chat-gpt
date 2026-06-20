@@ -59,7 +59,7 @@ const [showLoader, setShowLoader] = useState(false);
     console.log("Auto Login Status:", checkLogin.status);
 
     if (checkLogin.ok) {
-      setMessage("Signup successful! Auto Login Success ✅");
+      setMessage("Signup successful!  ✅");
     } else {
       setMessage("Signup successful! Auto Login Failed ❌");
     }
