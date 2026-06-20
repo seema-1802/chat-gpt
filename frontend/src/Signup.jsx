@@ -51,13 +51,27 @@ const [showLoader, setShowLoader] = useState(false);
       if (!res.ok) {
         setMessage(data.error || "Something went wrong");
       } else {
-        setMessage(
-          isSignup ? "Signup successful!" : "Login successful!"
-        );
+       if (isSignup) {
+    const checkLogin = await fetch(`${BACKEND_URL}/api/thread`, {
+      credentials: "include",
+    });
+
+    console.log("Auto Login Status:", checkLogin.status);
+
+    if (checkLogin.ok) {
+      setMessage("Signup successful! Auto Login Success ✅");
+    } else {
+      setMessage("Signup successful! Auto Login Failed ❌");
+    }
+  } else {
+    setMessage("Login successful! ✅");
+  }
+          // isSignup ? "Signup successful!" : "Login successful!"
+        
         setForm({ Name: "", Email: "", Password: "" });
         
 setUserData(data.user);
-setUserData(data.user);
+
 
 // Step 1 → show success
 setShowRightSuccess(true);
