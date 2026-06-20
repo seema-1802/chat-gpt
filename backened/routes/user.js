@@ -26,16 +26,18 @@ router.post("/signup", async (req, res) => {
         return res.status(500).json({ error: "Auto login failed" });
       }
 
-      return res.status(201).json({
-        message: "User registered successfully",
-        user: {
-          id: registeredUser._id,
-          Name: registeredUser.Name,
-          Email: registeredUser.Email,
-          ProfileImage: registeredUser.ProfileImage,
-        },
-      });
+      req.session.save(() => {
+    return res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        id: registeredUser._id,
+        Name: registeredUser.Name,
+        Email: registeredUser.Email,
+        ProfileImage: registeredUser.ProfileImage,
+      },
     });
+  });
+});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
