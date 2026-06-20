@@ -71,6 +71,8 @@ setTimeout(() => {
   setTimeout(() => {
     setUser(data.user);
     localStorage.setItem("user", JSON.stringify(data.user));
+
+  window.location.reload();
   }, 3000);
 
 }, 3000);
