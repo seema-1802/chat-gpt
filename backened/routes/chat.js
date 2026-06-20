@@ -33,7 +33,9 @@ router.post("/test", async (req, res) => {
 });
 router.get("/thread", async (req, res) => {
   try {
-    console.log("req.user =", req.user);
+     console.log("SESSION =", req.sessionID);
+  console.log("USER =", req.user);
+
 
     if (!req.user) {
       return res.status(401).json({ error: "Not logged in" });

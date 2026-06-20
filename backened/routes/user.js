@@ -60,7 +60,8 @@ router.post("/login", (req, res, next) => {
       if (loginErr) {
         return res.status(500).json({ error: "Login failed" });
       }
-
+console.log("LOGIN USER =", user.Email);
+  console.log("SESSION ID =", req.sessionID);
       res.json({
         message: "Logged in successfully",
         user: {
