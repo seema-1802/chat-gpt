@@ -41,6 +41,7 @@ const [showLoader, setShowLoader] = useState(false);
     try {
       const res = await fetch(url, {
         method: "POST",
+         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });

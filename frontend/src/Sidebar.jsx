@@ -20,7 +20,9 @@ const [search, setSearch] = useState("");
    const getAllThreads = async () => {
      setLoading(true);
     try {
-      const response = await fetch(`${BACKEND_URL}/api/thread`);
+      const response = await fetch(`${BACKEND_URL}/api/thread`, {
+  credentials: "include",
+});
 ;
       const res = await response.json();
 
