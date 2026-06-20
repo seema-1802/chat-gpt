@@ -236,4 +236,11 @@ bottom: 13px;
   margin-top: 10px;
   color: #aaa;
   font-size: 14px;
+}.backBtn {
+  margin-bottom: 15px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
+

@@ -140,6 +140,12 @@ const [showProfile, setShowProfile] = useState(false);
       <div className="chatBody">
         {showProfile ? (
     <div className="profileBox">
+       <button
+      className="backBtn"
+      onClick={() => setShowProfile(false)}
+    >
+      ← Back
+    </button>
       <img
         src={user?.ProfileImage || "https://i.pravatar.cc/100"}
         alt="user"
