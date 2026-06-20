@@ -151,7 +151,7 @@ bottom: 13px;
 .dropDownItem{
     font-size: 0.9rem;
     margin: 0.3rem 0rem;
-    padding: o.5rem 0.2rem;
+    padding: 0.5rem 0.2rem;
     cursor: pointer;
 }
 
@@ -201,6 +201,8 @@ bottom: 13px;
   padding: 30px;
   border-radius: 12px;
   width: 280px;
+  /* new add */
+  width: 90%;
 }
 
 .profileBox img {
@@ -242,6 +244,53 @@ bottom: 13px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: red;
+  
+}
+.dark-theme {
+  background: #202123;
+  color: white;
 }
 
+.light-theme {
+  background: #ffffff;
+  color: black;
+}
+
+.dark-theme .navbar,
+.dark-theme .chatBody,
+.dark-theme .chatInput {
+  background: #202123;
+  color: white;
+}
+
+.light-theme .navbar,
+.light-theme .chatBody,
+.light-theme .chatInput {
+  background: #ffffff;
+  color: black;
+}
+
+.dark-theme .input {
+  background: #343541;
+  color: white;
+}
+
+.light-theme .input {
+  background: #f3f3f3;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .dropDown {
+    right: 10px;
+    left: auto;
+    width: 170px;
+  }
+}
+.dark-theme .input::placeholder {
+  color: #b4b4b4;
+}
+
+.light-theme .input::placeholder {
+  color: #666;
+}
