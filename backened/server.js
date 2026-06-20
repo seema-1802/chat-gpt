@@ -7,7 +7,7 @@ import chatRoutes from "../backened/routes/chat.js"
 import authRoutes from "../backened/routes/user.js";
 import session from "express-session";
 import passport from "passport";
-
+import MongoStore from "connect-mongo";
 import User from "../backened/models/user.js";
 
 
@@ -15,13 +15,30 @@ const app = express();
 const port = 8080;
 
 app.use(express.json()); 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://chat-gpt-phi-rosy-95.vercel.app",
+    credentials: true,
+  })
+);
+app.set("trust proxy", 1);
 
-app.use(session({
-  secret: "secretkey",
-  resave: false,
-  saveUninitialized: false,
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "secretkey",
+    resave: false,
+    saveUninitialized: false,
+     store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+    }),
+    cookie: {
+      secure: true,
+      sameSite: "none",
+      httpOnly: true,
+       maxAge: 7 * 24 * 60 * 60 * 1000,
+    },
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
